@@ -28,8 +28,6 @@ APIのアプリケーションIDが必要です。
 
 ## インストール
 
-[GitHub](https://github.com/) with:
-
 daloconは、GitHubで公開している他のライブラリ、`rabbit`と`dalo`に依存しています。
 
 - [rabbit](https://github.com/syunsuke/rabbit) 文字列ユティリティ
@@ -65,6 +63,8 @@ devtools::install_github("syunsuke/dalocon")
 （下の例でxxxxxxx…となっている部分）
 
 ``` r
+library(dalocon)
+
 urls <- dalocon_get_table15_urls(appID = "xxxxxxxxxxxxxxxxxxxx")
 ```
 
@@ -80,7 +80,7 @@ urls <- dalocon_get_table15_urls(appID = "xxxxxxxxxxxxxxxxxxxx")
 ``` r
 dalocon_download_xls(appID = "xxxxxxxxxxxxxxxxxxxx", 
                      urls = urls, 
-                     dest_dir = "t15data/",check = )
+                     dest_dir = "t15data/")
 ```
 
 ここで、`dest_dir`で指定するディレクトリが存在しない場合、エラーで終了しますが、指定したディレクトリが存在しない場合に、自動的にディレクトリを作成したい場合は、`make_dir`引数にTRUEを渡します。
