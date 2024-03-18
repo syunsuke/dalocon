@@ -8,7 +8,7 @@
 
 DAta downLOad helper tool for collecting CONstruction stat data.
 
-daloconは、国道交通性が調査する建築着工統計調査のうち、
+daloconは、国道交通省が調査する建築着工統計調査のうち、
 以下のデータをe-Stat（政府統計の総合窓口）を通じて収集するツールです。
 
 - [建築物着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016965)
