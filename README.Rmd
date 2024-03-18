@@ -1,5 +1,17 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # dalocon
 
@@ -11,20 +23,20 @@ DAta downLOad helper tool for collecting CONstruction stat data.
 daloconは、国道交通性が調査する建築着工統計調査のうち、
 以下のデータをe-Stat（政府統計の総合窓口）を通じて収集するツールです。
 
-- [建築物着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016965)
-  ６−１表、６−２表　構造別の建築物の数等
-- [建築物着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016965)
-  ７−１表、７−２表　用途別の建築物の数等
-- [住宅着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016966)
-  １５表　利用関係別等の建築物の数等
+- [建築物着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016965) ６−１表、６−２表　構造別の建築物の数等
+- [建築物着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016965) ７−１表、７−２表　用途別の建築物の数等
+- [住宅着工統計](https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00600120&tstat=000001016966) １５表　利用関係別等の建築物の数等
+
 
 ### e-Stat APIのアプリケーションIDが必要
 
-daloconは、e-StatのAPIを利用しているので、 利用には、e-Stat
-APIのアプリケーションIDが必要です。
+daloconは、e-StatのAPIを利用しているので、
+利用には、e-Stat APIのアプリケーションIDが必要です。
 
 詳しくは「[e-stat API機能](https://www.e-stat.go.jp/api/)」及び
 「[よくあるご質問（FAQ）](https://www.e-stat.go.jp/api/api-dev/faq)」を参照しましょう。
+
+
 
 ## インストール
 
@@ -37,12 +49,13 @@ daloconは、GitHubで公開している他のライブラリ、`rabbit`と`dalo
 
 以下の順でインストールしてください。
 
-``` r
+```{r example000, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("syunsuke/rabbit")
 devtools::install_github("syunsuke/dalo")
 devtools::install_github("syunsuke/dalocon")
 ```
+
 
 ## 使い方
 
@@ -62,11 +75,13 @@ devtools::install_github("syunsuke/dalocon")
 実行して、そのURLを文字列のベクトルとして受け取ります。
 
 関数の引数`appID`にはe-statAPIのアプリケーションIDを文字列として渡します。
-（下の例でxxxxxxx…となっている部分）
+（下の例でxxxxxxx...となっている部分）
 
-``` r
+
+```{r example001, eval=FALSE}
 urls <- dalocon_get_table15_urls(appID = "xxxxxxxxxxxxxxxxxxxx")
 ```
+
 
 ### ファイルをダウンロードする
 
@@ -77,7 +92,7 @@ urls <- dalocon_get_table15_urls(appID = "xxxxxxxxxxxxxxxxxxxx")
 これは通常、先に実行した`dalocon_get_table15_urls()`関数の戻り値になります。
 最後に、ダウンロードしたエクセルファイルを保存するディレクトリを指定します。
 
-``` r
+```{r example002, eval=FALSE}
 dalocon_download_xls(appID = "xxxxxxxxxxxxxxxxxxxx", 
                      urls = urls, 
                      dest_dir = "t15data/",check = )
@@ -94,7 +109,7 @@ dalocon_download_xls(appID = "xxxxxxxxxxxxxxxxxxxx",
 
 上記の２つのオプションはデフォルトで次のような値になっています。
 
-``` r
+```{r example003, eval=FALSE}
 dalocon_download_xls(appID = "xxxxxxxxxxxxxxxxxxxx", 
                      urls = urls, 
                      dest_dir = "t15data/",
@@ -109,7 +124,7 @@ dalocon_download_xls(appID = "xxxxxxxxxxxxxxxxxxxx",
 関数には、各エクセルファイルのパス（ファイルがある場所）のベクトルを渡します。
 これは、`dir()`関数にエクセルファイルを保存したディレクトリを渡すことで得ることが出来ます。相対パスを正確に得るために`full.names`引数にTRUEを渡しておきます。
 
-``` r
+```{r example004, eval=FALSE}
 files <- dir("t15data", full.names = TRUE)
 t15_data <- dalocon_read_t15_xls(files)
 ```
@@ -126,6 +141,9 @@ Rのtidyverseで処理する場合に便利なように、
 
 その場合は、以下の関数を実行してください。
 
-``` r
+
+```{r example006, eval=FALSE}
 t15__tidy_data <- t15_data %>% dalocon_make_t15_tidy()
 ```
+
+
